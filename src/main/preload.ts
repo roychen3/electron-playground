@@ -13,4 +13,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
       ipcRenderer.removeListener('update-timer', listener);
     };
   },
+  onBeforeQuit: (callback) => {
+    const listener = () => callback();
+    ipcRenderer.on('before-quit', listener);
+    return () => {
+      ipcRenderer.removeListener('before-quit', listener);
+    };
+  },
+  confirmQuit: (confirmed: boolean) => ipcRenderer.send('confirm-quit', confirmed),
 } satisfies Window['electronAPI']);

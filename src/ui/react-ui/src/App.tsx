@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
@@ -8,6 +8,19 @@ function App() {
     () => () => {}
   );
   const [timer, setTimer] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const unsubscribeBeforeQuit = window.electronAPI.onBeforeQuit(() => {
+      const userConfirmed = window.confirm(
+        'The application is about to quit. Do you want to proceed?'
+      );
+      window.electronAPI.confirmQuit(userConfirmed);
+    });
+
+    return () => {
+      unsubscribeBeforeQuit();
+    };
+  }, []);
 
   return (
     <>

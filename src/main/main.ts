@@ -40,8 +40,30 @@ function createWindow() {
     }
   }, 0);
 
+  let isReallyClosing = false;
+  const handleBeforeQuit = async (event: Electron.Event) => {
+    if (!isReallyClosing) {
+      event.preventDefault();
+
+      win.webContents.send('before-quit');
+      const userConfirmed = await new Promise<boolean>((resolve) => {
+        ipcMain.on('confirm-quit', (_event, userConfirmed: boolean) => {
+          resolve(userConfirmed);
+        });
+      });
+
+      if (userConfirmed) {
+        isReallyClosing = true;
+        app.quit();
+        return;
+      }
+    }
+  };
+  app.on('before-quit', handleBeforeQuit);
+
   win.on('closed', () => {
     clearInterval(timer);
+    app.removeListener('before-quit', handleBeforeQuit);
   });
 }
 
