@@ -1,0 +1,27 @@
+{
+  "name": "electron-playground",
+  "version": "1.0.0",
+  "main": "./dist/main/main.js",
+  "workspaces": [
+    "src/ui/react-ui"
+  ],
+  "scripts": {
+    "watch:electron": "tsc -w",
+    "build:electron": "tsc",
+    "start:electron": "electron .",
+    "dev:react-ui": "npm run dev --workspace=react-ui",
+    "build:react-ui": "npm run build --workspace=react-ui",
+    "build": "npm-run-all --parallel build:react-ui build:electron"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "electron": "^39.2.7",
+    "npm-run-all": "^4.1.5",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
