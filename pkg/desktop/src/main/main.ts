@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 
-import { getPreloadPath, getReactUiPath } from './pathResolver';
+import { getPreloadPath, getUiPath } from './pathResolver';
 
 function handleSetTitle(event: Electron.IpcMainEvent, title: string) {
   const webContents = event.sender;
@@ -26,8 +26,9 @@ function createWindow() {
   });
 
   if (app.isPackaged) {
-    win.loadFile(getReactUiPath());
+    win.loadFile(getUiPath());
   } else {
+    // In development mode, choose the appropriate dev server URL, e.g., electron-ui or electron-use-web-ui.
     win.loadURL('http://localhost:5173/');
   }
 
