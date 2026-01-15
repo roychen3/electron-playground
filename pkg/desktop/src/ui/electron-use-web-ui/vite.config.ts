@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   build: {
-    outDir: '../../../dist/ui/react-ui/',
+    outDir: '../../../dist/ui/electron-use-web-ui/',
     emptyOutDir: true,
   },
 });

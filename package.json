@@ -3,25 +3,29 @@
   "version": "1.0.0",
   "main": "./dist/main/main.js",
   "workspaces": [
-    "src/ui/react-ui"
+    "pkg/desktop",
+    "pkg/desktop/src/ui/electron-use-web-ui",
+    "pkg/desktop/src/ui/electron-ui",
+    "pkg/web"
   ],
   "scripts": {
-    "watch:electron": "tsc -w",
-    "build:electron": "tsc",
-    "start:electron": "electron .",
-    "dev:react-ui": "npm run dev --workspace=react-ui",
-    "build:react-ui": "npm run build --workspace=react-ui",
-    "build": "npm-run-all --parallel build:react-ui build:electron"
+    "watch:desktop": "npm run watch --workspace=@mono/desktop",
+    "build:desktop": "npm run build --workspace=@mono/desktop",
+    "start:desktop": "npm run start --workspace=@mono/desktop",
+    "dev:electron-ui": "npm run dev --workspace=@mono/electron-ui",
+    "build:electron-ui": "npm run build --workspace=@mono/electron-ui",
+    "dev:web": "npm run dev --workspace=@mono/web",
+    "build:web": "npm run build --workspace=@mono/web",
+    "build:lib:web": "npm run build:lib --workspace=@mono/web",
+    "dev:electron-use-web-ui": "npm run dev --workspace=@mono/electron-use-web-ui",
+    "build:electron-use-web-ui": "npm run build --workspace=@mono/electron-use-web-ui",
+    "build": "npm-run-all --parallel build:desktop build:electron-ui build:web build:lib:web --sequential build:electron-use-web-ui"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/node": "^25.0.3",
-    "electron": "^39.2.7",
-    "npm-run-all": "^4.1.5",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "npm-run-all": "^4.1.5"
   }
 }

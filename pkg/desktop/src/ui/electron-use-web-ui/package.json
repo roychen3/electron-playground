@@ -1,5 +1,5 @@
 {
-  "name": "react-ui",
+  "name": "@mono/electron-use-web-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mono/web": "^0.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
